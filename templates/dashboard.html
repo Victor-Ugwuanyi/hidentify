@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · HIDENTIFY{% endblock %}
+{% block content %}
+<header class="topbar">
+    <div>
+        <h1>Dashboard</h1>
+        <p class="muted">Real-time overview of your network's health and threats.</p>
+    </div>
+    <div class="capture-controls">
+        <select id="iface-select" class="select"></select>
+        <button id="btn-start-capture" class="btn btn-primary">▶ Start Capture</button>
+        <button id="btn-stop-capture" class="btn btn-danger" style="display:none;">■ Stop Capture</button>
+    </div>
+</header>
+
+<section class="kpi-grid">
+    <div class="kpi-card">
+        <span class="kpi-label">Packets / window</span>
+        <span class="kpi-value" id="kpi-packets">0</span>
+    </div>
+    <div class="kpi-card">
+        <span class="kpi-label">Active Alerts</span>
+        <span class="kpi-value" id="kpi-alerts">0</span>
+    </div>
+    <div class="kpi-card">
+        <span class="kpi-label">Blocked IPs</span>
+        <span class="kpi-value" id="kpi-blocked">0</span>
+    </div>
+    <div class="kpi-card threat-card">
+        <span class="kpi-label">Threat Level</span>
+        <span class="kpi-value" id="kpi-threat">LOW</span>
+    </div>
+</section>
+
+<section class="grid-2">
+    <div class="panel">
+        <h3>Live Traffic (packets / window)</h3>
+        <canvas id="chart-traffic" height="110"></canvas>
+    </div>
+    <div class="panel">
+        <h3>Protocol Distribution</h3>
+        <canvas id="chart-protocol" height="110"></canvas>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h3>Recent Alerts</h3>
+        <a href="{{ url_for('alerts_page') }}" class="link">View all →</a>
+    </div>
+    <table class="data-table" id="recent-alerts-table">
+        <thead><tr><th>Time</th><th>Type</th><th>Severity</th><th>Source</th><th>Description</th></tr></thead>
+        <tbody></tbody>
+    </table>
+</section>
+
+{% endblock %}
+{% block extra_scripts %}
+<script>HIDENTIFY.initDashboard();</script>
+{% endblock %}

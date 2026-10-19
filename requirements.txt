@@ -1,0 +1,11 @@
+Flask==3.0.3
+Flask-SocketIO==5.3.6
+python-socketio==5.11.2
+scapy==2.5.0
+scikit-learn==1.5.1
+numpy==1.26.4
+geoip2==4.8.0
+werkzeug==3.0.3
+eventlet==0.36.1
+pywebview==5.2
+pyinstaller==6.10.0

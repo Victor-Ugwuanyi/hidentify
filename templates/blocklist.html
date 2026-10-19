@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Blocklist · HIDENTIFY{% endblock %}
+{% block content %}
+<header class="topbar">
+    <div>
+        <h1>Blocklist</h1>
+        <p class="muted">Manually or automatically blocked IP addresses.</p>
+    </div>
+</header>
+
+<section class="panel">
+    <form id="block-form" class="inline-form">
+        <input type="text" id="block-ip" placeholder="IP address, e.g. 192.168.1.50" required>
+        <input type="text" id="block-reason" placeholder="Reason (optional)">
+        <button type="submit" class="btn btn-primary">+ Block IP</button>
+    </form>
+</section>
+
+<section class="panel">
+    <table class="data-table" id="blocklist-table">
+        <thead><tr><th>IP</th><th>Reason</th><th>Added</th><th>Enforced</th><th></th></tr></thead>
+        <tbody></tbody>
+    </table>
+    <p class="muted small">"Enforced" means HIDENTIFY successfully added an OS firewall rule (iptables/netsh). On macOS, or without admin/root rights, IPs are tracked and alerted on but not auto-firewalled.</p>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script>HIDENTIFY.initBlocklistPage();</script>
+{% endblock %}

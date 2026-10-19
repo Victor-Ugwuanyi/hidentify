@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Settings · HIDENTIFY{% endblock %}
+{% block content %}
+<header class="topbar">
+    <div>
+        <h1>Settings</h1>
+        <p class="muted">Tune detection thresholds to fit your network.</p>
+    </div>
+</header>
+
+<form id="settings-form">
+<section class="grid-2">
+    <div class="panel">
+        <h3>Port Scan Detection</h3>
+        <label>Unique ports threshold</label>
+        <input type="number" name="port_scan_threshold" value="{{ settings.port_scan_threshold }}">
+        <label>Window (seconds)</label>
+        <input type="number" name="port_scan_window" value="{{ settings.port_scan_window }}">
+    </div>
+    <div class="panel">
+        <h3>SYN Flood Detection</h3>
+        <label>SYN packet threshold</label>
+        <input type="number" name="syn_flood_threshold" value="{{ settings.syn_flood_threshold }}">
+        <label>Window (seconds)</label>
+        <input type="number" name="syn_flood_window" value="{{ settings.syn_flood_window }}">
+    </div>
+</section>
+
+<section class="grid-2">
+    <div class="panel">
+        <h3>ICMP Flood Detection</h3>
+        <label>ICMP echo threshold</label>
+        <input type="number" name="icmp_flood_threshold" value="{{ settings.icmp_flood_threshold }}">
+        <label>Window (seconds)</label>
+        <input type="number" name="icmp_flood_window" value="{{ settings.icmp_flood_window }}">
+    </div>
+    <div class="panel">
+        <h3>Anomaly Detection (ML)</h3>
+        <label class="checkbox-row"><input type="checkbox" name="anomaly_detection_enabled" {{ 'checked' if settings.anomaly_detection_enabled }}> Enabled</label>
+        <label>Bucket window (seconds)</label>
+        <input type="number" name="anomaly_window_seconds" value="{{ settings.anomaly_window_seconds }}">
+        <label>Baseline buckets before scoring</label>
+        <input type="number" name="anomaly_baseline_buckets" value="{{ settings.anomaly_baseline_buckets }}">
+    </div>
+</section>
+
+<section class="grid-2">
+    <div class="panel">
+        <h3>ARP &amp; Blocking</h3>
+        <label class="checkbox-row"><input type="checkbox" name="arp_spoof_enabled" {{ 'checked' if settings.arp_spoof_enabled }}> ARP spoof detection enabled</label>
+        <label class="checkbox-row"><input type="checkbox" name="auto_block_critical" {{ 'checked' if settings.auto_block_critical }}> Auto-block source IP on critical alerts</label>
+    </div>
+    <div class="panel">
+        <h3>GeoIP</h3>
+        <label class="checkbox-row"><input type="checkbox" name="geoip_enabled" {{ 'checked' if settings.geoip_enabled }}> Enabled (requires data/GeoLite2-City.mmdb)</label>
+    </div>
+</section>
+
+<button type="submit" class="btn btn-primary">Save Settings</button>
+</form>
+{% endblock %}
+{% block extra_scripts %}
+<script>HIDENTIFY.initSettingsPage();</script>
+{% endblock %}

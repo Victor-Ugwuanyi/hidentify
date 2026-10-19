@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+venv/
+env/
+.venv/
+data/*.db
+data/*.mmdb
+data/settings.json
+.DS_Store
+*.log
+.idea/
+.vscode/
+dist/
+build/
+*.spec.bak
+dist/
+build/

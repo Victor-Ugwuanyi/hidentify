@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}HIDENTIFY{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 6v6c0 5.2 3.6 9.8 9 11 5.4-1.2 9-5.8 9-11V6l-9-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-name">HIDENTIFY</span>
+                <span class="brand-sub">Network Defense Console</span>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="{{ url_for('dashboard') }}" class="nav-item {{ 'active' if request.endpoint=='dashboard' }}">
+                <span class="nav-icon">◆</span> Dashboard
+            </a>
+            <a href="{{ url_for('traffic_page') }}" class="nav-item {{ 'active' if request.endpoint=='traffic_page' }}">
+                <span class="nav-icon">◈</span> Live Traffic
+            </a>
+            <a href="{{ url_for('alerts_page') }}" class="nav-item {{ 'active' if request.endpoint=='alerts_page' }}">
+                <span class="nav-icon">▲</span> Alerts
+            </a>
+            <a href="{{ url_for('blocklist_page') }}" class="nav-item {{ 'active' if request.endpoint=='blocklist_page' }}">
+                <span class="nav-icon">■</span> Blocklist
+            </a>
+            <a href="{{ url_for('settings_page') }}" class="nav-item {{ 'active' if request.endpoint=='settings_page' }}">
+                <span class="nav-icon">⚙</span> Settings
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="capture-pill" id="global-capture-pill">
+                <span class="dot" id="global-capture-dot"></span>
+                <span id="global-capture-label">Checking...</span>
+            </div>
+            <div class="user-row">
+                <span>{{ username }}</span>
+                <a href="{{ url_for('logout') }}" title="Log out">⏻</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

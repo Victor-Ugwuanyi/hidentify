@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Alerts · HIDENTIFY{% endblock %}
+{% block content %}
+<header class="topbar">
+    <div>
+        <h1>Alerts</h1>
+        <p class="muted">Full intrusion &amp; anomaly alert history.</p>
+    </div>
+    <div class="capture-controls">
+        <select id="filter-severity" class="select">
+            <option value="">All severities</option>
+            <option value="critical">Critical</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <select id="filter-type" class="select">
+            <option value="">All types</option>
+            <option value="Port Scan">Port Scan</option>
+            <option value="SYN Flood">SYN Flood</option>
+            <option value="ICMP Flood">ICMP Flood</option>
+            <option value="ARP Spoofing">ARP Spoofing</option>
+            <option value="Blocklisted IP Activity">Blocklisted IP Activity</option>
+            <option value="Traffic Anomaly">Traffic Anomaly</option>
+        </select>
+    </div>
+</header>
+
+<section class="panel">
+    <table class="data-table" id="alerts-table">
+        <thead>
+        <tr><th>Time</th><th>Type</th><th>Severity</th><th>Source</th><th>Destination</th><th>Location</th><th>Description</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script>HIDENTIFY.initAlertsPage();</script>
+{% endblock %}

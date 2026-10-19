@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Live Traffic · HIDENTIFY{% endblock %}
+{% block content %}
+<header class="topbar">
+    <div>
+        <h1>Live Traffic</h1>
+        <p class="muted">Streaming traffic buckets in real time.</p>
+    </div>
+</header>
+
+<section class="panel">
+    <h3>Traffic Volume</h3>
+    <canvas id="chart-traffic-full" height="90"></canvas>
+</section>
+
+<section class="grid-2">
+    <div class="panel">
+        <h3>Anomaly Score</h3>
+        <canvas id="chart-anomaly" height="110"></canvas>
+        <p class="muted small">Scored by an IsolationForest trained on this network's own baseline traffic. Negative scores are more anomalous.</p>
+    </div>
+    <div class="panel">
+        <h3>Window Breakdown</h3>
+        <table class="data-table" id="window-table">
+            <thead><tr><th>Time</th><th>Packets</th><th>Bytes</th><th>TCP</th><th>UDP</th><th>ICMP</th><th>Unique Src</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script>HIDENTIFY.initTrafficPage();</script>
+{% endblock %}

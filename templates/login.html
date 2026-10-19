@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login · HIDENTIFY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-body">
+<div class="login-bg-grid"></div>
+<div class="login-card">
+    <div class="login-brand">
+        <div class="brand-mark large">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L3 6v6c0 5.2 3.6 9.8 9 11 5.4-1.2 9-5.8 9-11V6l-9-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <h1>HIDENTIFY</h1>
+        <p>Network Intrusion Detection &amp; Monitoring</p>
+    </div>
+
+    {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
+
+    <form method="POST" class="login-form">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="admin" autocomplete="username" required autofocus>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+        <button type="submit">Sign In</button>
+    </form>
+    <p class="login-hint">Default: admin / hidentify123 — change this in config.py before real use.</p>
+</div>
+</body>
+</html>
